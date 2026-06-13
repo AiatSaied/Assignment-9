@@ -264,7 +264,13 @@ main .contacts .right-side .card-empty p,
 .modal-body .modal-image label,
 .modal-body form .item label,
 .modal-body form .checkbox-part label span,
-.modal-footer button {
+.modal-footer button,
+.contact-card .contact-header .contact-name .contact-info .phone-number,
+.contact-card .contact-header .contact-details .contact span,
+.contact-card .contact-footer .phone-icon i,
+.contact-card .contact-footer .email-icon i,
+.contact-card .contact-footer .edit i,
+.contact-card .contact-footer .delete i {
   font-size: 14px;
   line-height: 1.4;
 }
@@ -601,62 +607,174 @@ main .contacts .right-side .card-empty p {
 .modal-footer .btn-save:hover {
   box-shadow: var(--main-shadow);
 }
-/* .form-control-custom.is-invalid {
-  border-color: #ef4444;
+
+/* New Contact Card */
+.new-contacts .contact-card {
+  box-shadow:
+    0 1px 3px 0 #0000001a,
+    0 1px 2px -1px #0000001a;
+  border: 1px solid #f6f3f4;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
 }
-
-.form-check-custom .form-check-input:checked {
-  background-color: #7c3aed;
-  border-color: #7c3aed;
-} */
-
-/* ─── Contact Card (for when contacts exist) ────────────── */
-.contact-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid #f3f4f6;
-  transition: box-shadow 0.2s;
+.new-contacts .contact-card:hover {
+  box-shadow:
+    0 10px 15px -3px #0000001a,
+    0 4px 6px -4px #0000001a;
+  border-color: #ebe6e7;
 }
-
-.contact-card:hover {
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.12);
+.new-contacts .contact-card .contact-header {
+  padding-bottom: 12px;
+  padding: 16px;
+  flex: 1;
 }
-
-.contact-avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #7c3aed;
-  flex-shrink: 0;
+.new-contacts .contact-card .contact-header .contact-name {
+  gap: 14px;
 }
-
-.contact-name {
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: #1a1a2e;
+.new-contacts .contact-card .contact-header .contact-name .icon {
+  font-size: 18px;
+  width: 56px;
+  height: 56px;
+  box-shadow:
+    0 1px 3px 0 #0000001a,
+    0 1px 2px -1px #0000001a;
+  background-image: linear-gradient(to bottom right, #00bc7d, #009689);
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
 }
-
-.contact-phone {
-  font-size: 0.8rem;
-  color: #6b7280;
+.new-contacts .contact-card .contact-header .contact-name .contact-info {
+  flex: 1;
+  padding-top: 4px;
+  min-width: 0;
 }
-
-.badge-group {
-  font-size: 0.68rem;
-  font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: 20px;
-  background: #ede9fe;
-  color: #7c3aed;
+.new-contacts .contact-card .contact-header .contact-name .contact-info h3 {
+  color: var(--main-black);
+}
+.contact-card .contact-header .contact-name .contact-info .phone-icon {
+  background-color: #dbeafe;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+.contact-card .contact-header .contact-name .contact-info .phone-icon i {
+  font-size: 9px;
+  color: #155dfc;
+}
+.contact-card .contact-header .contact-name .contact-info .phone-number {
+  color: var(--main-gray);
+}
+.new-contacts .contact-card .contact-header .contact-name .contact-info h3,
+.contact-card .contact-header .contact-name .contact-info .phone-number,
+.contact-card .contact-header .contact-details .contact span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.contact-card .contact-header .contact-details {
+  margin-top: 12px;
+}
+.contact-card .contact-header .contact-details .contact {
+  margin-bottom: 8px;
+  gap: 10px;
+}
+.contact-card .contact-header .contact-details .email-icon {
+  background-color: #ede9fe;
+  width: 28px;
+  height: 28px;
+}
+.contact-card .contact-header .contact-details .email-icon i {
+  color: #7f22fe;
+  font-size: 10px;
+}
+.contact-card .contact-header .contact-details .contact span {
+  color: #4a5565;
+}
+.contact-card .contact-header .contact-details .address-icon {
+  background-color: #d0fae5;
+  width: 28px;
+  height: 28px;
+}
+.contact-card .contact-header .contact-details .address-icon i {
+  color: #009966;
+  font-size: 10px;
+}
+.contact-card .contact-header .other {
+  gap: 6px;
+  margin-top: 12px;
+}
+.contact-card .contact-header .other span {
+  color: #364153;
+  font-size: 11px;
+  background-color: #f6f3f4;
+}
+.contact-card .contact-footer {
+  padding: 10px 16px;
+  background-color: #f9fafbcc;
+  border-top: 1px solid #f6f3f4;
+  margin-top: auto;
+}
+.contact-card .contact-footer .phone-icon,
+.contact-card .contact-footer .email-icon,
+.contact-card .contact-footer .contact-icons {
+  width: 36px;
+  height: 36px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+.contact-card .contact-footer .phone-icon {
+  color: #009966;
+  background-color: #ecfdf5;
+}
+.contact-card .contact-footer .phone-icon:hover {
+  background-color: #d0fae5;
+}
+.contact-card .contact-footer button {
+  border: none;
+}
+.contact-card .contact-footer .email-icon {
+  color: #7f22fe;
+  background-color: #f5f3ff;
+}
+.contact-card .contact-footer .email-icon:hover {
+  color: #ffb900;
+  background-color: #ede9fe;
+}
+.contact-card .contact-footer .favorite,
+.contact-card .contact-footer .emergency {
+  color: #99a1af;
+  background-color: #fbf9fa;
+}
+.contact-card .contact-footer .edit,
+.contact-card .contact-footer .delete {
+  color: #6a7282;
+  background-color: #fbf9fa;
+}
+.contact-card .contact-footer .favorite:hover {
+  color: #ffb900;
+  background-color: #f6f3f4;
+}
+.contact-card .contact-footer .emergency:hover {
+  color: #ff2056;
+  background-color: #f6f3f4;
+}
+.contact-card .contact-footer .edit:hover {
+  color: #4f39f6;
+  background-color: #eef2ff;
+}
+.contact-card .contact-footer .delete:hover {
+  color: #ec003f;
+  background-color: #fff1f2;
 }
