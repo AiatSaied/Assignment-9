@@ -634,7 +634,7 @@ main .contacts .right-side .card-empty p {
 .new-contacts .contact-card .contact-header .contact-name {
   gap: 14px;
 }
-.new-contacts .contact-card .contact-header .contact-name .icon {
+.new-contacts .contact-card .contact-header .contact-name .name-icon {
   font-size: 18px;
   width: 56px;
   height: 56px;
@@ -647,6 +647,40 @@ main .contacts .right-side .card-empty p {
   -moz-border-radius: 12px;
   -ms-border-radius: 12px;
   -o-border-radius: 12px;
+}
+.contact-card .contact-header .contact-name .name-icon.favorite:before,
+.contact-card .contact-header .contact-name .name-icon.emergency:after {
+  position: absolute;
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  font-size: 8px;
+  z-index: 2;
+  color: white;
+  box-shadow: 0 0 0 2px #fff;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.contact-card .contact-header .contact-name .name-icon.favorite:before {
+  content: "\f005";
+  top: -2px;
+  right: -2px;
+  border: 1px solid #eee;
+  background-color: #ffb900;
+}
+.contact-card .contact-header .contact-name .name-icon.emergency:after {
+  content: "\f21e";
+  bottom: -2px;
+  right: -2px;
+  border: 1px solid #eee;
+  background-color: #ff2056;
 }
 .new-contacts .contact-card .contact-header .contact-name .contact-info {
   flex: 1;
@@ -708,14 +742,24 @@ main .contacts .right-side .card-empty p {
   color: #009966;
   font-size: 10px;
 }
-.contact-card .contact-header .other {
+.contact-card .contact-header .other-part {
   gap: 6px;
   margin-top: 12px;
 }
-.contact-card .contact-header .other span {
-  color: #364153;
+.contact-card .contact-header .other-part span {
   font-size: 11px;
+}
+.contact-card .contact-header .other-part .other {
+  color: #364153;
   background-color: #f6f3f4;
+}
+.contact-card .contact-header .other-part .friends {
+  color: #008236;
+  background-color: #dcfce7;
+}
+.contact-card .contact-header .other-part .emergency {
+  color: #ec003f;
+  background-color: #fff1f2;
 }
 .contact-card .contact-footer {
   padding: 10px 16px;
@@ -766,7 +810,15 @@ main .contacts .right-side .card-empty p {
   color: #ffb900;
   background-color: #f6f3f4;
 }
+.contact-card .contact-footer .favorite.active {
+  color: #ffb900;
+  background-color: #f6f3f4;
+}
 .contact-card .contact-footer .emergency:hover {
+  color: #ff2056;
+  background-color: #f6f3f4;
+}
+.contact-card .contact-footer .emergency.active {
   color: #ff2056;
   background-color: #f6f3f4;
 }

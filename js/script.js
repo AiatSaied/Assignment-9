@@ -77,8 +77,59 @@ function hideModal() {
 
 function displayContacts() {
   var allContacts = "";
-
+  var favoriteContact = "";
+  var emergencyContact = "";
+  var countFavorites = 0;
+  var countEmergency = 0;
   for (var i = 0; i < contacts.length; i++) {
+    if (contacts[i].isFavorite) {
+      countFavorites++;
+      favoriteContact += `          
+          <div class="side-card favorites bg-white rounded-4">
+            <div class="card-header">
+              <div class="d-flex align-items-center gap-3">
+                <div
+                  class="card-icon rounded-3 d-flex justify-content-center align-items-center"
+                >
+                  <i class="fa-solid fa-star text-white"></i>
+                </div>
+                <div class="card-title">
+                  <h2 class="fw-semibold fs-6 lh-base mb-0">Favorites</h2>
+                  <p class="mb-0">Quick access to starred contacts</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-body overflow-y-auto" id="favorite">
+              <div class="card-empty text-center">
+                <p>No favorites yet</p>
+              </div>
+            </div>
+          </div>`;
+      emergencyContact += `          
+        <div class="side-card emergency bg-white rounded-4">
+            <div class="card-header">
+              <div class="d-flex align-items-center gap-3">
+                <div
+                  class="card-icon rounded-3 d-flex justify-content-center align-items-center"
+                >
+                  <i class="fa-solid fa-heart-pulse text-white"></i>
+                </div>
+                <div class="card-title">
+                  <h2 class="fw-semibold fs-6 lh-base mb-0">Emergency</h2>
+                  <p class="mb-0">Important contacts for urgent calls</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-body overflow-y-auto" id="favorite">
+              <div class="card-empty text-center">
+                <p>No emergency contacts</p>
+              </div>
+            </div>
+          </div>`;
+    }
+    if (contacts[i].isEmergency) {
+      countEmergency++;
+    }
     allContacts += `                  
                   <div class="col-sm-6">
                     <div
@@ -88,14 +139,14 @@ function displayContacts() {
                         <div class="contact-name d-flex align-items-start">
                           <div class="position-relative flex-shrink-0">
                             <div
-                              class="icon text-white fw-semibold lh-base d-flex align-items-center justify-content-center"
+                              class="name-icon text-white fw-semibold lh-base d-flex align-items-center justify-content-center ${contacts[i].isFavorite ? "favorite" : ""} ${contacts[i].isEmergency ? "emergency" : ""}"
                             >
                               CY
                             </div>
                           </div>
                           <div class="contact-info">
                             <h3 class="fs-6 lh-base fw-semibold mb-0">
-                              Caryn York
+                              ${contacts[i].fullName}
                             </h3>
                             <div class="d-flex align-items-center gap-2 mt-1">
                               <div
@@ -104,7 +155,7 @@ function displayContacts() {
                                 <i class="fa-solid fa-phone"></i>
                               </div>
                               <span class="phone-number fw-medium"
-                                >01012345678</span
+                                >${contacts[i].phoneNumber}</span
                               >
                             </div>
                           </div>
@@ -116,7 +167,7 @@ function displayContacts() {
                             >
                               <i class="fa-solid fa-envelope"></i>
                             </div>
-                            <span>ralo@mailinator.com</span>
+                            <span>${contacts[i].emailAddress}</span>
                           </div>
                           <div class="contact d-flex align-items-center">
                             <div
@@ -124,14 +175,24 @@ function displayContacts() {
                             >
                               <i class="fa-solid fa-location-dot"></i>
                             </div>
-                            <span>Minim odit dolorem e </span>
+                            <span>${contacts[i].address}</span>
                           </div>
                         </div>
-                        <div class="other d-inline-flex flex-wrap">
+                        <div class="other-part d-inline-flex flex-wrap">
                           <span
-                            class="d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
+                            class="other d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
                             >Other</span
                           >
+                          <span
+                            class="friends d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
+                            >${contacts[i].group}</span
+                          >
+                          <span
+                            class="emergency d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2 ${contacts[i].isEmergency ? "d-flex" : "d-none"}"
+                            >
+                            <i class="fa-solid fa-heart-pulse me-1"></i>
+                            Emergency
+                          </span>
                         </div>
                       </div>
                       <div
@@ -139,31 +200,32 @@ function displayContacts() {
                       >
                         <div class="d-flex align-items-center gap-1">
                           <a
-                            href="tel:01012345678"
+                            href="tel:${contacts[i].phoneNumber}"
                             class="phone-icon rounded-3 d-flex align-items-center justify-content-center"
                             title="Call"
                           >
                             <i class="fa-solid fa-phone"></i>
                           </a>
-                          <button
+                          <a
+                            href="mailto:${contacts[i].emailAddress}"
                             class="email-icon rounded-3 d-flex align-items-center justify-content-center"
                             title="Email"
                           >
                             <i class="fa-solid fa-envelope"></i>
-                          </button>
+                          </a>
                         </div>
                         <div class="d-flex align-items-center gap-1">
                           <button
-                            class="contact-icons favorite rounded-3 d-flex align-items-center justify-content-center"
+                            class="contact-icons favorite ${contacts[i].isFavorite ? "active" : ""} rounded-3 d-flex align-items-center justify-content-center"
                             title="Favorite"
                           >
-                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
                           </button>
                           <button
-                            class="contact-icons emergency rounded-3 d-flex align-items-center justify-content-center"
+                            class="contact-icons emergency ${contacts[i].isEmergency ? "active" : ""} rounded-3 d-flex align-items-center justify-content-center"
                             title="Emergency"
                           >
-                            <i class="fa-regular fa-heart"></i>
+                            <i class="fa-solid fa-heart-pulse"></i>
                           </button>
                           <button
                             class="contact-icons edit rounded-3 d-flex align-items-center justify-content-center"
@@ -185,4 +247,10 @@ function displayContacts() {
                   </div>`;
   }
   document.getElementById("rowData").innerHTML = allContacts;
+  document.getElementById("total-count").innerHTML = contacts.length;
+  document.getElementById("favorite-count").innerHTML = countFavorites;
+  document.getElementById("emergency-count").innerHTML = countEmergency;
 }
+
+// Stoppppppppp at Video 6
+// at 01:30

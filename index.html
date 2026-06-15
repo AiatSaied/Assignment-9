@@ -77,7 +77,7 @@
                 </div>
                 <div class="card-content">
                   <p class="mb-0 text-uppercase fw-medium">Total</p>
-                  <p class="mb-0 fw-bold">0</p>
+                  <p id="total-count" class="mb-0 fw-bold">0</p>
                 </div>
               </div>
             </div>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="card-content">
                   <p class="mb-0 text-uppercase fw-medium">Favorites</p>
-                  <p class="mb-0 fw-bold">0</p>
+                  <p id="favorite-count" class="mb-0 fw-bold">0</p>
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="card-content">
                   <p class="mb-0 text-uppercase fw-medium">Emergency</p>
-                  <p class="mb-0 fw-bold">0</p>
+                  <p id="emergency-count" class="mb-0 fw-bold">0</p>
                 </div>
               </div>
             </div>
@@ -147,7 +147,7 @@
             <div class="new-contacts" id="contactsList">
               <div class="container">
                 <div class="row g-3" id="rowData">
-                  <div class="col-sm-6">
+                  <!-- <div class="col-sm-6">
                     <div
                       class="contact-card bg-white rounded-4 overflow-hidden d-flex flex-column h-100"
                     >
@@ -155,7 +155,7 @@
                         <div class="contact-name d-flex align-items-start">
                           <div class="position-relative flex-shrink-0">
                             <div
-                              class="icon text-white fw-semibold lh-base d-flex align-items-center justify-content-center"
+                              class="name-icon text-white fw-semibold lh-base d-flex align-items-center justify-content-center"
                             >
                               CY
                             </div>
@@ -194,10 +194,20 @@
                             <span>Minim odit dolorem e </span>
                           </div>
                         </div>
-                        <div class="other d-inline-flex flex-wrap">
+                        <div class="other-part d-inline-flex flex-wrap">
                           <span
-                            class="d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
+                            class="other d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
                             >Other</span
+                          >
+                          <span
+                            class="friends d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
+                            >Friends</span
+                          >
+                          <span
+                            class="emergency d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
+                            >
+                            <i class="fa-solid fa-heart-pulse me-1"></i>
+                            Emergency</span
                           >
                         </div>
                       </div>
@@ -249,7 +259,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -290,6 +300,26 @@
             <div class="card-body overflow-y-auto" id="favorite">
               <div class="card-empty text-center">
                 <p>No favorites yet</p>
+              </div>
+              <div class="p-2 d-grid overflow-y-auto">
+                <a
+                  href="tel:01012345678"
+                  class="d-flex align-items-center gap-1 p-2 bg-white"
+                >
+                  <div class="position-relative flex-shrink-0">
+                    <div
+                      class="name-icon text-white fw-semibold lh-base d-flex align-items-center justify-content-center"
+                    >
+                      CY
+                    </div>
+                  </div>
+                  <div class="contact-info">
+                    <h3 class="fs-6 lh-base fw-semibold mb-0">Caryn York</h3>
+                    <div class="d-flex align-items-center gap-2 mt-1">
+                      <span class="phone-number fw-medium">01012345678</span>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
