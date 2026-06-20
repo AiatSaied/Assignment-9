@@ -376,7 +376,84 @@ main .contacts .right-side .card-empty {
 main .contacts .right-side .card-empty p {
   color: #99a1af;
 }
-
+main .contacts .right-side .card-body .fav-card,
+main .contacts .right-side .card-body .emergency-card {
+  scrollbar-width: none;
+  padding: 12px;
+  gap: 8px;
+}
+main .contacts .right-side .card-body .fav-card a,
+main .contacts .right-side .card-body .emergency-card a {
+  border: 1px solid #f6f3f4;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  transition: var(--main-transition);
+  -webkit-transition: var(--main-transition);
+  -moz-transition: var(--main-transition);
+  -ms-transition: var(--main-transition);
+  -o-transition: var(--main-transition);
+}
+main .contacts .right-side .card-body .fav-card a:hover {
+  background-image: linear-gradient(to right, #fffbeb, #fff7ed);
+  border-color: #fee685;
+}
+main .contacts .right-side .card-body .emergency-card a:hover {
+  background-image: linear-gradient(to right, #fff1f2, #fef2f2);
+  border-color: #ffccd3;
+}
+main .contacts .right-side .card-body .fav-card .icon-box,
+main .contacts .right-side .card-body .emergency-card .icon-box {
+  width: 36px;
+  height: 36px;
+}
+main .contacts .right-side .card-body .fav-card .icon-box .name-icon,
+main .contacts .right-side .card-body .emergency-card .icon-box .name-icon {
+  font-size: 14px;
+  line-height: 1.4;
+  width: 40px;
+  height: 40px;
+  box-shadow:
+    0 1px 3px 0 #0000001a,
+    0 1px 2px -1px #0000001a;
+  background-image: linear-gradient(to bottom right, #00bc7d, #009689);
+}
+main .contacts .right-side .card-body .fav-card .contact-info,
+main .contacts .right-side .card-body .emergency-card .contact-info {
+  flex: 1;
+  min-width: 0;
+}
+main .contacts .right-side .card-body .fav-card .contact-info h4,
+main .contacts .right-side .card-body .emergency-card .contact-info h4 {
+  color: var(--main-black);
+  line-height: 1.25;
+  font-size: 14px;
+}
+main .contacts .right-side .card-body .fav-card .contact-info p,
+main .contacts .right-side .card-body .emergency-card .contact-info p {
+  font-size: 12px;
+  color: #99a1af;
+}
+main .contacts .right-side .card-body .fav-card .phone-icon {
+  color: #009966;
+  background-color: #d0fae5;
+  width: 24px;
+  height: 24px;
+}
+main .contacts .right-side .card-body .emergency-card .phone-icon {
+  color: #ec003f;
+  background-color: #ffe4e6;
+  width: 24px;
+  height: 24px;
+}
+main .contacts .right-side .card-body .fav-card .phone-icon i,
+main .contacts .right-side .card-body .emergency-card .phone-icon i {
+  font-size: 8px;
+}
+main .contacts .right-side .card-body .emergency-card {
+}
 /* Main Content - Media Query */
 @media (min-width: 600px) {
   main {
@@ -641,7 +718,7 @@ main .contacts .right-side .card-empty p {
   box-shadow:
     0 1px 3px 0 #0000001a,
     0 1px 2px -1px #0000001a;
-  background-image: linear-gradient(to bottom right, #00bc7d, #009689);
+  /* background-image: linear-gradient(to bottom right, #00bc7d, #009689); */
   border-radius: 12px;
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;

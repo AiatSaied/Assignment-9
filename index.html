@@ -37,7 +37,7 @@
             id="addContactBtn"
             data-bs-toggle="modal"
             data-bs-target="#addContactModal"
-            class="contact text-white fw-semibold d-inline-flex align-ite"
+            class="contact text-white fw-semibold d-inline-flex align-items-center"
           >
             <i class="fa-solid fa-plus"></i>
             <span class="d-none d-sm-inline">Add Contact</span>
@@ -140,12 +140,13 @@
                 class="w-100 bg-white"
                 placeholder="Search by name, phone, or email..."
                 id="searchInput"
+                onkeyup="displayContacts()"
               />
             </div>
 
             <!-- Contact list -->
             <div class="new-contacts" id="contactsList">
-              <div class="container">
+              <div class="container-fluid">
                 <div class="row g-3" id="rowData">
                   <!-- <div class="col-sm-6">
                     <div
@@ -205,7 +206,7 @@
                           >
                           <span
                             class="emergency d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
-                            >
+                          >
                             <i class="fa-solid fa-heart-pulse me-1"></i>
                             Emergency</span
                           >
@@ -282,7 +283,7 @@
         </div>
         <!-- Right Sidebar -->
         <div class="right-side">
-          <!-- Favorites card -->
+          <!-- Favorite card -->
           <div class="side-card favorites bg-white rounded-4">
             <div class="card-header">
               <div class="d-flex align-items-center gap-3">
@@ -301,26 +302,31 @@
               <div class="card-empty text-center">
                 <p>No favorites yet</p>
               </div>
-              <div class="p-2 d-grid overflow-y-auto">
-                <a
-                  href="tel:01012345678"
-                  class="d-flex align-items-center gap-1 p-2 bg-white"
-                >
-                  <div class="position-relative flex-shrink-0">
+              <!-- <div class="fav-card row overflow-y-auto">
+                <div class="col-sm-6 col-xl-12">
+                  <a
+                    href="tel:01012345678"
+                    class="d-flex align-items-center gap-1 p-2 bg-white"
+                  >
+                    <div class="icon-box flex-shrink-0">
+                      <div
+                        class="name-icon text-white fw-semibold rounded-3 d-flex align-items-center justify-content-center"
+                      >
+                        CY
+                      </div>
+                    </div>
+                    <div class="contact-info ms-2">
+                      <h4 class="fw-semibold mb-0">Caryn York</h4>
+                      <p class="mb-0">01012345678</p>
+                    </div>
                     <div
-                      class="name-icon text-white fw-semibold lh-base d-flex align-items-center justify-content-center"
+                      class="phone-icon rounded-2 d-flex align-items-center justify-content-center flex-shrink-0"
                     >
-                      CY
+                      <i class="fa-solid fa-phone"></i>
                     </div>
-                  </div>
-                  <div class="contact-info">
-                    <h3 class="fs-6 lh-base fw-semibold mb-0">Caryn York</h3>
-                    <div class="d-flex align-items-center gap-2 mt-1">
-                      <span class="phone-number fw-medium">01012345678</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
+                  </a>
+                </div>
+              </div> -->
             </div>
           </div>
           <!-- Emergency card -->
@@ -338,7 +344,7 @@
                 </div>
               </div>
             </div>
-            <div class="card-body overflow-y-auto" id="favorite">
+            <div class="card-body overflow-y-auto" id="emergency">
               <div class="card-empty text-center">
                 <p>No emergency contacts</p>
               </div>
