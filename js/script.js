@@ -21,7 +21,8 @@ var contactSubtitle = document.getElementById("contactSubtitle");
 
 var saveContactBtn = document.getElementById("saveContactBtn");
 
-var fullNameRegex = /^[A-Za-z]+\s+[A-Za-z]+(?:\s+[A-Za-z]+)*$/;
+// var fullNameRegex = /^[a-zA-Z\s'.'-]{2,50}$/;
+var fullNameRegex = /^(?=.*[a-zA-Z])[a-zA-Z\s.'-]{2,50}$/;
 var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 var phoneRegex = /^(010|011|012|015|\+2010|\+2011|\+2012|\+2015)\d{8}$/;
 
@@ -34,9 +35,16 @@ var mainIndex = 0;
 var currentIndex;
 
 var contacts = localStorageContacts();
-displayContacts();
+
 
 saveContactBtn.addEventListener("click", addContact);
+
+// Validation contacts
+fullNameInput.addEventListener("input", validateName);
+phoneInput.addEventListener("input", validatePhone);
+emailAddressInput.addEventListener("input", validateEmail);
+
+displayContacts();
 
 // Functions
 
@@ -49,13 +57,54 @@ function localStorageContacts() {
   }
 }
 
+// Validation Form for Name, Phone, and Email
+function validateName() {
+  if (fullNameRegex.test(fullNameInput.value)) {
+    nameError.classList.add("d-none");
+    fullNameInput.classList.remove("is-invalid");
+    return true;
+  } else {
+    nameError.classList.remove("d-none");
+    fullNameInput.classList.add("is-invalid");
+    return false;
+  }
+}
+
+function validatePhone() {
+  if (phoneRegex.test(phoneInput.value)) {
+    phoneError.classList.add("d-none");
+    phoneInput.classList.remove("is-invalid");
+    return true;
+  } else {
+    phoneError.classList.remove("d-none");
+    phoneInput.classList.add("is-invalid");
+    return false;
+  }
+}
+
+function validateEmail() {
+  if (
+    emailAddressInput.value === "" ||
+    emailRegex.test(emailAddressInput.value)
+  ) {
+    emailError.classList.add("d-none");
+    emailAddressInput.classList.remove("is-invalid");
+    return true;
+  } else {
+    emailError.classList.remove("d-none");
+    emailAddressInput.classList.add("is-invalid");
+    return false;
+  }
+}
+
 // Add Contact
 function addContact() {
-  if (
-    fullNameRegex.test(fullNameInput.value) &&
-    emailRegex.test(emailAddressInput.value) &&
-    phoneRegex.test(phoneInput.value)
-  ) {
+  // Check the validation
+  var isNameValid = validateName();
+  var isPhoneValid = validatePhone();
+  var isEmailValid = validateEmail();
+
+  if (isNameValid && isPhoneValid && isEmailValid) {
     var newContact = {
       fullName: fullNameInput.value,
       phoneNumber: phoneInput.value,
@@ -65,7 +114,6 @@ function addContact() {
       notes: notesInput.value,
       isFavorite: isFavorite.checked,
       isEmergency: isEmergency.checked,
-
       color:
         addContactLabel.textContent.trim() === "Add New Contact"
           ? generateRandomColor()
@@ -75,7 +123,7 @@ function addContact() {
     if (addContactLabel.textContent.trim() === "Add New Contact") {
       contacts.push(newContact);
 
-      // Sweet Alert to show valid message
+      // Sweet Alert for Valid Form
       Swal.fire({
         title: "Added",
         text: `${newContact.fullName} Contact has been added successfully`,
@@ -88,20 +136,30 @@ function addContact() {
     }
 
     localStorage.setItem("contacts", JSON.stringify(contacts));
-
     displayContacts();
-
     resetForm();
     hideModal();
   } else {
-    // Sweet Alert to show invalid message
-    Swal.fire({
-      title: "Invalid Phone!",
-      text: "Please enter a valid Egyptian phone number (e.g., 01012345678 or +201012345678)",
-      icon: "error",
-      timer: 2000,
-      showConfirmButton: false,
-    });
+    // Sweet Alert - Error Messages based on the invalid part
+    if (!isNameValid) {
+      Swal.fire({
+        title: "Invalid Name",
+        text: "Name should contain only letters and spaces (2-50 characters)",
+        icon: "error",
+      });
+    } else if (!isPhoneValid) {
+      Swal.fire({
+        title: "Invalid Phone",
+        text: "Please enter a valid Egyptian phone number (e.g., 01012345678 or +201012345678)",
+        icon: "error",
+      });
+    } else if (!isEmailValid) {
+      Swal.fire({
+        title: "Invalid Email",
+        text: "Please enter a valid email address",
+        icon: "error",
+      });
+    }
   }
 }
 
