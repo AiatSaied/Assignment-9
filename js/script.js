@@ -414,13 +414,6 @@ function displayContacts() {
     countEmergency > 0
       ? emergencyContact
       : `<div class="card-empty text-center"><p>No emergency contacts</p></div>`;
-
-  // document.getElementById("favorite").innerHTML = favoriteContact;
-  // document.getElementById("emergency").innerHTML = emergencyContact;
-
-  // document.getElementById("total-count").innerHTML = contacts.length;
-  // document.getElementById("favorite-count").innerHTML = countFavorites;
-  // document.getElementById("emergency-count").innerHTML = countEmergency;
 }
 
 // Delete Contact
@@ -512,7 +505,7 @@ function generateRandomColor() {
   return colors[randomColor];
 }
 
-// Adding or Removing Contact from Favorite or Emergency
+// Adding or Removing Contact from Favorite or Emergency by using its button in the card
 function buttonFavorite(index) {
   contacts[index].isFavorite = !contacts[index].isFavorite;
   localStorage.setItem("contacts", JSON.stringify(contacts));
