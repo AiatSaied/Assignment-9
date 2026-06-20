@@ -258,7 +258,7 @@ main .contacts .left-side .search-bar .search-icon i {
 }
 main .contacts .left-side .side-subtitle,
 main .contacts .left-side .search-bar input,
-main .contacts .left-side .contacts-list .empty-status p:last-of-type,
+main .contacts .left-side .new-contacts .empty-status p:last-of-type,
 main .contacts .right-side .card-icon i,
 main .contacts .right-side .card-empty p,
 .modal-body .modal-image label,
@@ -294,29 +294,29 @@ main .contacts .left-side .search-bar input:focus {
   box-shadow: 0 0 0 2px #8e51ff33;
   border-color: #8e51ff;
 }
-main .contacts .left-side .contacts-list {
+/* main .contacts .left-side .new-contacts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-}
-main .contacts .left-side .contacts-list .empty-status {
+} */
+main .contacts .left-side .new-contacts .empty-status {
   padding-block: 80px;
-  grid-column: 1 / -1;
+  /* grid-column: 1 / -1; */
 }
-main .contacts .left-side .contacts-list .empty-status .empty-icon {
+main .contacts .left-side .new-contacts .empty-status .empty-icon {
   background-color: #f6f3f4;
   width: 80px;
   height: 80px;
 }
-main .contacts .left-side .contacts-list .empty-status .empty-icon i {
+main .contacts .left-side .new-contacts .empty-status .empty-icon i {
   color: #d1d5dc;
   line-height: 1.2;
   font-size: 30px;
 }
-main .contacts .left-side .contacts-list .empty-status p:first-of-type {
+main .contacts .left-side .new-contacts .empty-status p:first-of-type {
   color: var(--main-gray);
 }
-main .contacts .left-side .contacts-list .empty-status p:last-of-type {
+main .contacts .left-side .new-contacts .empty-status p:last-of-type {
   color: #99a1af;
   margin-top: 4px;
 }
@@ -336,7 +336,7 @@ main .contacts .right-side .card-header {
   padding: 16px 20px;
   border-bottom: 1px solid #f6f3f4;
 }
-main .contacts .right-side .favorites .card-header {
+main .contacts .right-side .favorite .card-header {
   background-image: linear-gradient(to right, #fffbeb, #fff7ed);
 }
 main .contacts .right-side .emergency .card-header {
@@ -346,7 +346,7 @@ main .contacts .right-side .card-icon {
   width: 36px;
   height: 36px;
 }
-main .contacts .right-side .favorites .card-icon {
+main .contacts .right-side .favorite .card-icon {
   box-shadow:
     0 4px 6px -1px #fe9a0033,
     0 2px 4px -2px #fe9a0033;
@@ -418,7 +418,7 @@ main .contacts .right-side .card-body .emergency-card .icon-box .name-icon {
   box-shadow:
     0 1px 3px 0 #0000001a,
     0 1px 2px -1px #0000001a;
-  background-image: linear-gradient(to bottom right, #00bc7d, #009689);
+  /* background-image: linear-gradient(to bottom right, #00bc7d, #009689); */
 }
 main .contacts .right-side .card-body .fav-card .contact-info,
 main .contacts .right-side .card-body .emergency-card .contact-info {
@@ -452,8 +452,7 @@ main .contacts .right-side .card-body .fav-card .phone-icon i,
 main .contacts .right-side .card-body .emergency-card .phone-icon i {
   font-size: 8px;
 }
-main .contacts .right-side .card-body .emergency-card {
-}
+
 /* Main Content - Media Query */
 @media (min-width: 600px) {
   main {

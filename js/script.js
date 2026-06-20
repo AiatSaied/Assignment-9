@@ -1,4 +1,5 @@
 // Variables
+
 var MyContactModal = document.getElementById("addContactModal");
 var addContactLabel = document.getElementById("addContactLabel");
 
@@ -13,11 +14,24 @@ var notesInput = document.getElementById("notes");
 var isFavorite = document.getElementById("isFavorite");
 var isEmergency = document.getElementById("isEmergency");
 
+var rowData = document.getElementById("rowData");
+var emptyStatus = document.getElementById("emptyStatus");
+
+var contactSubtitle = document.getElementById("contactSubtitle");
+
 var saveContactBtn = document.getElementById("saveContactBtn");
 
-var updateContactBtn = document.getElementById("updateContactBtn");
+var fullNameRegex = /^[A-Za-z]+\s+[A-Za-z]+(?:\s+[A-Za-z]+)*$/;
+var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+var phoneRegex = /^(010|011|012|015|\+2010|\+2011|\+2012|\+2015)\d{8}$/;
+
+var nameError = document.getElementById("nameError");
+var phoneError = document.getElementById("phoneError");
+var emailError = document.getElementById("emailError");
 
 var mainIndex = 0;
+
+var currentIndex;
 
 var contacts = localStorageContacts();
 displayContacts();
@@ -37,46 +51,58 @@ function localStorageContacts() {
 
 // Add Contact
 function addContact() {
-  var newContact = {
-    fullName: fullNameInput.value,
-    phoneNumber: phoneInput.value,
-    emailAddress: emailAddressInput.value,
-    address: addressInput.value,
-    group: groupInput.value,
-    notes: notesInput.value,
-    isFavorite: isFavorite.checked,
-    isEmergency: isEmergency.checked,
-  };
+  if (
+    fullNameRegex.test(fullNameInput.value) &&
+    emailRegex.test(emailAddressInput.value) &&
+    phoneRegex.test(phoneInput.value)
+  ) {
+    var newContact = {
+      fullName: fullNameInput.value,
+      phoneNumber: phoneInput.value,
+      emailAddress: emailAddressInput.value,
+      address: addressInput.value,
+      group: groupInput.value,
+      notes: notesInput.value,
+      isFavorite: isFavorite.checked,
+      isEmergency: isEmergency.checked,
 
-  if (addContactLabel.innerHTML === "Add New Contact") {
-    contacts.push(newContact);
+      color:
+        addContactLabel.textContent.trim() === "Add New Contact"
+          ? generateRandomColor()
+          : contacts[mainIndex] && contacts[mainIndex].color,
+    };
 
+    if (addContactLabel.textContent.trim() === "Add New Contact") {
+      contacts.push(newContact);
+
+      // Sweet Alert to show valid message
+      Swal.fire({
+        title: "Added",
+        text: `${newContact.fullName} Contact has been added successfully`,
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    } else {
+      editContact(newContact);
+    }
+
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+
+    displayContacts();
+
+    resetForm();
+    hideModal();
+  } else {
+    // Sweet Alert to show invalid message
     Swal.fire({
-      title: "Added",
-      text: `${newContact.fullName} Contact has been added successfully`,
-      icon: "success",
+      title: "Invalid Phone!",
+      text: "Please enter a valid Egyptian phone number (e.g., 01012345678 or +201012345678)",
+      icon: "error",
       timer: 2000,
       showConfirmButton: false,
     });
-  } else {
-    editContact(newContact);
   }
-
-  localStorage.setItem("contacts", JSON.stringify(contacts));
-
-  resetForm();
-  hideModal();
-
-  // Sweet Alert to show valid or invalid message
-  // Swal.fire({
-  //   title: "Invalid Phone!",
-  //   text: "Please enter a valid Egyptian phone number (e.g., 01012345678 or +201012345678)",
-  //   icon: "error",
-  //   timer: 2000,
-  //   showConfirmButton: false,
-  // });
-
-  displayContacts();
 }
 
 // Edit Contact
@@ -94,6 +120,7 @@ function editContact(newContact) {
     showConfirmButton: false,
   });
 }
+
 // Clear Data
 function resetForm() {
   fullNameInput.value = "";
@@ -104,6 +131,8 @@ function resetForm() {
   notesInput.value = "";
   isFavorite.checked = false;
   isEmergency.checked = false;
+
+  addContactLabel.innerHTML = "Add New Contact";
 }
 
 // Hide Modal
@@ -122,7 +151,7 @@ function displayContacts() {
   var countFavorites = 0;
   var countEmergency = 0;
   for (var i = 0; i < contacts.length; i++) {
-    var nameIcon = generateNameIcon(contacts[i].fullName);
+    var nameIcon = generateNameIcon(contacts[i].fullName, contacts[i].color);
 
     if (contacts[i].isFavorite) {
       countFavorites++;
@@ -273,12 +302,14 @@ function displayContacts() {
             </div>
             <div class="d-flex align-items-center gap-1">
               <button
+                onclick="buttonFavorite(${i})"
                 class="contact-icons favorite ${contacts[i].isFavorite ? "active" : ""} rounded-3 d-flex align-items-center justify-content-center"
                 title="Favorite"
               >
                 <i class="fa-solid fa-star"></i>
               </button>
               <button
+                onclick="buttonEmergency(${i})"
                 class="contact-icons emergency ${contacts[i].isEmergency ? "active" : ""} rounded-3 d-flex align-items-center justify-content-center"
                 title="Emergency"
               >
@@ -307,12 +338,31 @@ function displayContacts() {
       `;
     }
   }
-  document.getElementById("rowData").innerHTML = allContacts;
+  rowData.innerHTML = allContacts;
+  emptyStatus.classList.toggle("d-none", allContacts !== "");
+
   document.getElementById("total-count").innerHTML = contacts.length;
   document.getElementById("favorite-count").innerHTML = countFavorites;
   document.getElementById("emergency-count").innerHTML = countEmergency;
-  document.getElementById("favorite").innerHTML = favoriteContact;
-  document.getElementById("emergency").innerHTML = emergencyContact;
+
+  contactSubtitle.innerHTML = `Manage and organize your ${contacts.length} contacts`;
+
+  document.getElementById("favorite").innerHTML =
+    countFavorites > 0
+      ? favoriteContact
+      : `<div class="card-empty text-center"><p>No favorites yet</p></div>`;
+
+  document.getElementById("emergency").innerHTML =
+    countEmergency > 0
+      ? emergencyContact
+      : `<div class="card-empty text-center"><p>No emergency contacts</p></div>`;
+
+  // document.getElementById("favorite").innerHTML = favoriteContact;
+  // document.getElementById("emergency").innerHTML = emergencyContact;
+
+  // document.getElementById("total-count").innerHTML = contacts.length;
+  // document.getElementById("favorite-count").innerHTML = countFavorites;
+  // document.getElementById("emergency-count").innerHTML = countEmergency;
 }
 
 // Delete Contact
@@ -346,22 +396,23 @@ function deleteContact(contactIndex) {
 function showEditModal(contactIndex) {
   mainIndex = contactIndex;
 
-  fullNameInput.value = contacts[contactIndex].fullName;
-  phoneInput.value = contacts[contactIndex].phoneNumber;
-  emailAddressInput.value = contacts[contactIndex].emailAddress;
-  addressInput.value = contacts[contactIndex].address;
-  groupInput.value = contacts[contactIndex].group;
-  notesInput.value = contacts[contactIndex].notes;
-  isFavorite.checked = contacts[contactIndex].isFavorite;
-  isEmergency.checked = contacts[contactIndex].isEmergency;
+  var contact = contacts[contactIndex];
+
+  fullNameInput.value = contact.fullName;
+  phoneInput.value = contact.phoneNumber;
+  emailAddressInput.value = contact.emailAddress;
+  addressInput.value = contact.address;
+  groupInput.value = contact.group;
+  notesInput.value = contact.notes;
+  isFavorite.checked = contact.isFavorite;
+  isEmergency.checked = contact.isEmergency;
 
   addContactLabel.innerHTML = "Edit Contact";
 }
-
 // Generate Name Icon
-function generateNameIcon(fullName) {
+function generateNameIcon(fullName, color) {
   var nameIcon = {
-    color: "red",
+    color: color,
     name: fullName
       .trim()
       .split(" ")
@@ -374,16 +425,44 @@ function generateNameIcon(fullName) {
 }
 
 // Generate Random Color
-function randomColor() {
+function generateRandomColor() {
   var colors = [
     "#FF5733",
-    "#33FF57",
+    "#3352ff90",
     "#3357FF",
-    "#F333FF",
     "#FF33A1",
-    "#33FFF5",
-    "#F5FF33",
-    "#FFA533",
+    "#FF8C33",
+    "#8C33FF",
+    "#33fff55c",
+    "#b0b824f2",
+    "#4d45a2f2",
+    "#FF3333",
+    "#33ff8b8d",
+    "#6d105fa4",
+    "#ff33f5d8",
+    "#1b8cee",
+    "#A133FF",
+    "#362843",
+    "#65624f",
   ];
-  return colors[Math.floor(Math.random() * colors.length)];
+
+  var randomColor;
+  do {
+    randomColor = Math.floor(Math.random() * colors.length);
+  } while (randomColor === currentIndex);
+  currentIndex = randomColor;
+  return colors[randomColor];
+}
+
+// Adding or Removing Contact from Favorite or Emergency
+function buttonFavorite(index) {
+  contacts[index].isFavorite = !contacts[index].isFavorite;
+  localStorage.setItem("contacts", JSON.stringify(contacts));
+  displayContacts();
+}
+
+function buttonEmergency(index) {
+  contacts[index].isEmergency = !contacts[index].isEmergency;
+  localStorage.setItem("contacts", JSON.stringify(contacts));
+  displayContacts();
 }

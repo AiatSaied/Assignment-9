@@ -123,7 +123,7 @@
             >
               <div>
                 <h2 class="side-title mb-0 fw-bold">All Contacts</h2>
-                <p class="side-subtitle mb-0">
+                <p class="side-subtitle mb-0" id="contactSubtitle">
                   Manage and organize your 0 contacts
                 </p>
               </div>
@@ -146,129 +146,9 @@
 
             <!-- Contact list -->
             <div class="new-contacts" id="contactsList">
-              <div class="container-fluid">
-                <div class="row g-3" id="rowData">
-                  <!-- <div class="col-sm-6">
-                    <div
-                      class="contact-card bg-white rounded-4 overflow-hidden d-flex flex-column h-100"
-                    >
-                      <div class="contact-header">
-                        <div class="contact-name d-flex align-items-start">
-                          <div class="position-relative flex-shrink-0">
-                            <div
-                              class="name-icon text-white fw-semibold lh-base d-flex align-items-center justify-content-center"
-                            >
-                              CY
-                            </div>
-                          </div>
-                          <div class="contact-info">
-                            <h3 class="fs-6 lh-base fw-semibold mb-0">
-                              Caryn York
-                            </h3>
-                            <div class="d-flex align-items-center gap-2 mt-1">
-                              <div
-                                class="phone-icon d-flex align-items-center justify-content-center flex-shrink-0"
-                              >
-                                <i class="fa-solid fa-phone"></i>
-                              </div>
-                              <span class="phone-number fw-medium"
-                                >01012345678</span
-                              >
-                            </div>
-                          </div>
-                        </div>
-                        <div class="contact-details">
-                          <div class="contact d-flex align-items-center">
-                            <div
-                              class="email-icon rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
-                            >
-                              <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <span>ralo@mailinator.com</span>
-                          </div>
-                          <div class="contact d-flex align-items-center">
-                            <div
-                              class="address-icon rounded-3 d-flex align-items-center justify-content-center flex-shrink-0"
-                            >
-                              <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <span>Minim odit dolorem e </span>
-                          </div>
-                        </div>
-                        <div class="other-part d-inline-flex flex-wrap">
-                          <span
-                            class="other d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
-                            >Other</span
-                          >
-                          <span
-                            class="friends d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
-                            >Friends</span
-                          >
-                          <span
-                            class="emergency d-inline-flex align-items-center px-2 py-1 fw-medium rounded-2"
-                          >
-                            <i class="fa-solid fa-heart-pulse me-1"></i>
-                            Emergency</span
-                          >
-                        </div>
-                      </div>
-                      <div
-                        class="contact-footer d-flex align-items-center justify-content-between"
-                      >
-                        <div class="d-flex align-items-center gap-1">
-                          <a
-                            href="tel:01012345678"
-                            class="phone-icon rounded-3 d-flex align-items-center justify-content-center"
-                            title="Call"
-                          >
-                            <i class="fa-solid fa-phone"></i>
-                          </a>
-                          <button
-                            class="email-icon rounded-3 d-flex align-items-center justify-content-center"
-                            title="Email"
-                          >
-                            <i class="fa-solid fa-envelope"></i>
-                          </button>
-                        </div>
-                        <div class="d-flex align-items-center gap-1">
-                          <button
-                            class="contact-icons favorite rounded-3 d-flex align-items-center justify-content-center"
-                            title="Favorite"
-                          >
-                            <i class="fa-regular fa-star"></i>
-                          </button>
-                          <button
-                            class="contact-icons emergency rounded-3 d-flex align-items-center justify-content-center"
-                            title="Emergency"
-                          >
-                            <i class="fa-regular fa-heart"></i>
-                          </button>
-                          <button
-                            class="contact-icons edit rounded-3 d-flex align-items-center justify-content-center"
-                            data-bs-toggle="modal"
-                            data-bs-target="#contactModal"
-                            title="Edit"
-                          >
-                            <i class="fa-solid fa-pen"></i>
-                          </button>
-                          <button
-                            class="contact-icons delete rounded-3 d-flex align-items-center justify-content-center"
-                            title="Delete"
-                          >
-                            <i class="fa-solid fa-trash"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                </div>
+              <div class="row g-3" id="rowData">
+                <!-- Contacts Data will be added here by JS -->
               </div>
-            </div>
-          </div>
-
-          <!-- Contact list -->
-          <div id="contactsList">
-            <div class="contacts-list">
               <div class="empty-status text-center" id="emptyStatus">
                 <div
                   class="empty-icon rounded-4 d-flex justify-content-center align-items-center mx-auto mb-3"
@@ -284,7 +164,7 @@
         <!-- Right Sidebar -->
         <div class="right-side">
           <!-- Favorite card -->
-          <div class="side-card favorites bg-white rounded-4">
+          <div class="side-card favorite bg-white rounded-4">
             <div class="card-header">
               <div class="d-flex align-items-center gap-3">
                 <div
@@ -302,31 +182,7 @@
               <div class="card-empty text-center">
                 <p>No favorites yet</p>
               </div>
-              <!-- <div class="fav-card row overflow-y-auto">
-                <div class="col-sm-6 col-xl-12">
-                  <a
-                    href="tel:01012345678"
-                    class="d-flex align-items-center gap-1 p-2 bg-white"
-                  >
-                    <div class="icon-box flex-shrink-0">
-                      <div
-                        class="name-icon text-white fw-semibold rounded-3 d-flex align-items-center justify-content-center"
-                      >
-                        CY
-                      </div>
-                    </div>
-                    <div class="contact-info ms-2">
-                      <h4 class="fw-semibold mb-0">Caryn York</h4>
-                      <p class="mb-0">01012345678</p>
-                    </div>
-                    <div
-                      class="phone-icon rounded-2 d-flex align-items-center justify-content-center flex-shrink-0"
-                    >
-                      <i class="fa-solid fa-phone"></i>
-                    </div>
-                  </a>
-                </div>
-              </div> -->
+              <!-- Favorite List will be added here by JS -->
             </div>
           </div>
           <!-- Emergency card -->
@@ -348,6 +204,7 @@
               <div class="card-empty text-center">
                 <p>No emergency contacts</p>
               </div>
+              <!-- Emergency List will be added here by JS -->
             </div>
           </div>
         </div>
@@ -534,7 +391,7 @@
               Cancel
             </button>
             <button
-              type="submit"
+              type="button"
               class="btn-save fw-semibold text-white"
               id="saveContactBtn"
             >
